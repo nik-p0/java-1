@@ -41,7 +41,7 @@ public class lesson1 {
     }
 
     //Задание 3.
-    static int task3(int a, int b, int c, int d){
+    static double task3(double a, double b, double c, double d){
         return a * (b + (c / d));
     }
     //Задание 4.
@@ -54,11 +54,7 @@ public class lesson1 {
     }
     //Задание 5.
     static void task5 (int a){
-        if (a < 0){
-            System.out.println("Отрицательное число");
-        } else {
-            System.out.println("Положительное число");
-        }
+        System.out.println(a < 0 ? "Отрицательное число" : "Положительное число");
     }
     //Задание 6.
     static boolean task6(int a){
