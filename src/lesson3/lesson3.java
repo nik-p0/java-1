@@ -24,21 +24,19 @@ public class lesson3 {
 
     static void game(){
         int rNum = randNum();
-        int count = 3;
 
         for (int i = 3; i > 0; i--)  {
-            count--;
             System.out.println("Введите число");
             int userNum = getNum();
             if (userNum == rNum){
                 System.out.println("Вы угадали");
                 break;
             } else if (userNum > rNum){
-                System.out.println("Загаданное число меньше осталось " + count + " попыток");
+                System.out.println("Загаданное число меньше осталось " + (i-1) + " попыток");
             } else {
-                System.out.println("Загаданное число больше осталось " + count + " попыток");
+                System.out.println("Загаданное число больше осталось " + (i-1) + " попыток");
             }
-            if (count == 0){
+            if (i == 1){
                 System.out.println();
                 System.out.println("Вы не угадали, было загадано число " + rNum);
 
