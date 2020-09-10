@@ -53,20 +53,55 @@ public class lesson4 {
         map[y][x] = DOT_X;
     }
 
+    /*
+    4. *** Доработать искусственный интеллект, чтобы он мог блокировать ходы игрока.
+    */
+
     static void aiTurn(){
         Random random = new Random();
-        int x;
-        int y;
+        int x = 0;
+        int y = 0;
+        boolean aiWin = false;
+        boolean humanWin = false;
 
-        do {
-            x = random.nextInt(SIZE);
-            y = random.nextInt(SIZE);
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                if(isCellValid(i, j)){
+                    map[j][i] = DOT_O;
+                    if (isWinner(DOT_O)){
+                        x = i;
+                        y = j;
+                        aiWin = true;
+                    }
+                    map[j][i] = DOT_EMPTY;
+                }
+            }
+          }
+        if(!aiWin){
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    if(isCellValid(i, j)){
+                        map[j][i] = DOT_X;
+                        if (isWinner(DOT_X)){
+                            x = i;
+                            y = j;
+                            humanWin = true;
+                    }
+                    map[j][i] = DOT_EMPTY;
 
-        }while(!isCellValid(x, y));
+                }
+            }
+          }
+        }
+        if (!aiWin && !humanWin) {
+            do {
+                x = random.nextInt(SIZE);
+                y = random.nextInt(SIZE);
 
-        System.out.println("Компьютер походил " + (x+1) + " и " + (y+1) );
-
+            } while (!isCellValid(x, y));
+        }
         map[y][x] = DOT_O;
+        System.out.println("Компьютер походил " + (x+1) + " и " + (y+1) );
     }
 
     static boolean isCellValid(int x, int y){
