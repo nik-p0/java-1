@@ -7,7 +7,7 @@ public class lesson4 {
 
 
     static char [][] map;
-    static final int SIZE = 3;
+    static final int SIZE = 5;
 
     static final int winCon = 3;
 
@@ -114,52 +114,6 @@ public class lesson4 {
         return false;
     }
 
-    /*static boolean isWinner (char symb){
-        if (map[0][0] == symb && map[0][1] == symb && map[0][2] == symb){
-            return true;
-        }if (map[1][0] == symb && map[1][1] == symb && map[1][2] == symb){
-            return true;
-        }if (map[2][0] == symb && map[2][1] == symb && map[2][2] == symb){
-            return true;
-
-
-        }if (map[0][0] == symb && map[1][0] == symb && map[2][0] == symb){
-            return true;
-        }if (map[0][1] == symb && map[1][1] == symb && map[2][1] == symb){
-            return true;
-        }if (map[0][2] == symb && map[1][2] == symb && map[2][2] == symb){
-            return true;
-
-
-        }if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb){
-            return true;
-        }if (map[0][2] == symb && map[1][1] == symb && map[2][0] == symb){
-            return true;
-        }
-        return false;
-    }
-    */
-
-    /*
-    2. Переделать проверку победы, чтобы она не была реализована просто набором условий,
-       например, с использованием циклов.
-    */
-    
-    /*static boolean isWinner (char symb){
-        for (int i = 0; i < map.length ; i++) {
-            if (map[i][0] == symb && map[i][1] == symb && map[i][2] == symb ||
-                map[0][i] == symb && map[1][i] == symb && map[2][i] == symb){
-                return true;
-            }
-            if (map[0][0] == symb && map[1][1] == symb && map[2][2] == symb ||
-                map[0][2] == symb && map[1][1] == symb && map[2][0] == symb){
-                return true;
-            }
-        }
-        return false;
-    }    
-    */
-
 
     /*
     3. * Попробовать переписать логику проверки победы, чтобы она работала для поля 5х5 и количества фишек 4.
@@ -171,11 +125,9 @@ public class lesson4 {
     если поле, например, 5 на 5 и условие победы 3 символа подряд, работает только для координат
     в пределах 3 на 3.
     Не могу понять почему не работает сдвиг(shift в цикле).
-
-    На этом застрял, до ИИ пока так и не добрался.(
     */
     
-    static boolean isWinner (char symb){
+    /*static boolean isWinner (char symb){
         char [] arrayCheck;
         arrayCheck = new char[winCon];
         for (int i = 0; i < winCon; i++) {
@@ -215,7 +167,51 @@ public class lesson4 {
 
         return false;
     }
+    */
+    static boolean isWinner(char symb){
+        int line;
+        int column;
+        int diag;
+        int diagOp;
 
+        for (int i = 0; i < SIZE; i++) {
+            line = 0;
+            column = 0;
+            diag = 0;
+            diagOp = 0;
+            for (int j = 0; j <SIZE ; j++) {
+
+                if (map[i][j] == symb){
+                    line++;
+                } else {
+                    line = 0;
+                }
+                if (line == winCon) return true;
+
+                if (map[j][i] == symb){
+                    column++;
+                } else {
+                    column = 0;
+                }
+                if (column == winCon) return true;
+
+                if (map[j][j] == symb){
+                    diag++;
+                } else {
+                    diag = 0;
+                }
+                if (diag == winCon) return true;
+
+                if (map[j][SIZE - j - 1] == symb){
+                    diagOp++;
+                } else {
+                    diagOp = 0;
+                }
+                if (diagOp == winCon) return true;
+            }
+        }
+        return false;
+    }
 
 
     static boolean isMapFull(){
